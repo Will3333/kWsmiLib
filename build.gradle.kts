@@ -11,6 +11,7 @@
 plugins {
     kotlin("multiplatform") version "1.3.61"
     id("org.jetbrains.dokka") version "0.9.18"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.3.61"
     `maven-publish`
 }
 
@@ -21,6 +22,8 @@ repositories {
     mavenCentral()
     jcenter()
 }
+
+val serializationVersion =  "0.14.0"
 
 tasks.dokka {
     outputFormat = "html"
@@ -41,6 +44,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serializationVersion")
             }
         }
         val commonTest by getting {
@@ -56,6 +60,7 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-jdk8"))
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializationVersion")
             }
         }
         val jvmTest by getting {
@@ -70,6 +75,7 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-js"))
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:$serializationVersion")
             }
         }
         val jsTest by getting {
