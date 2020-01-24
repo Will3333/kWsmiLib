@@ -7,7 +7,8 @@ import java.net.URL
 @Serializer(forClass = URL::class)
 object URLSerializer : KSerializer<URL>
 {
-    override val descriptor: SerialDescriptor = StringDescriptor.withName("URL")
+    override val descriptor: SerialDescriptor
+        get() = StringDescriptor
 
     override fun serialize(encoder: Encoder, obj: URL) {
         encoder.encodeString(obj.toString())

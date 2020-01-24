@@ -7,7 +7,8 @@ import java.io.File
 @Serializer(forClass = File::class)
 object FileSerializer : KSerializer<File>
 {
-    override val descriptor: SerialDescriptor = StringDescriptor.withName("File")
+    override val descriptor: SerialDescriptor
+        get() = StringDescriptor
 
     override fun serialize(encoder: Encoder, obj: File) {
         encoder.encodeString(obj.path)
