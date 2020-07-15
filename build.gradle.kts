@@ -9,9 +9,8 @@
  */
 
 plugins {
-    kotlin("multiplatform") version "1.3.61"
-    id("org.jetbrains.dokka") version "0.9.18"
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.3.61"
+    kotlin("multiplatform") version "1.3.72"
+    kotlin("plugin.serialization") version "1.3.72"
     `maven-publish`
 }
 
@@ -23,17 +22,9 @@ repositories {
     jcenter()
 }
 
-val serializationVersion =  "0.14.0"
-
-tasks.dokka {
-    outputFormat = "html"
-    outputDirectory = "$buildDir/javadoc"
-}
+val serializationVersion =  "0.20.0"
 
 kotlin {
-    /* Targets configuration omitted. 
-    *  To find out how to configure the targets, please follow the link:
-    *  https://kotlinlang.org/docs/reference/building-mpp-with-gradle.html#setting-up-targets */
 
     jvm()
     js {
@@ -47,12 +38,6 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serializationVersion")
             }
         }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
-            }
-        }
 
         val allJvm by creating {
             dependsOn(commonMain)
@@ -61,11 +46,6 @@ kotlin {
             dependencies {
                 implementation(kotlin("stdlib-jdk8"))
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializationVersion")
-            }
-        }
-        val jvmTest by getting {
-            dependencies {
-                implementation(kotlin("test-testng"))
             }
         }
 
@@ -77,25 +57,6 @@ kotlin {
                 implementation(kotlin("stdlib-js"))
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:$serializationVersion")
             }
-        }
-        val jsTest by getting {
-            dependencies {
-                implementation(kotlin("test-js"))
-            }
-        }
-    }
-}
-
-publishing {
-    publications.withType<MavenPublication>().apply {
-        val jvm by getting {
-
-        }
-        val js by getting {
-
-        }
-        val metadata by getting {
-
         }
     }
 }
