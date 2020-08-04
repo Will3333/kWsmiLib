@@ -10,8 +10,8 @@
 
 package pro.wsmi.kwsmilib
 
-fun Double.limit(upper_limit: Double? = null, lower_limit: Double? = null) : Double = when {
-    upper_limit != null && this > upper_limit -> upper_limit
-    lower_limit != null && this < lower_limit -> lower_limit
+fun Double.limit(upperLimit: Double? = null, lowerLimit: Double? = null) : Double = when {
+    upperLimit != null && this > upperLimit -> upperLimit
+    lowerLimit != null && this < lowerLimit -> lowerLimit
     else -> this
 }
