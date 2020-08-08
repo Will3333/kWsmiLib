@@ -10,8 +10,23 @@
 
 package pro.wsmi.kwsmilib
 
-fun Double.limit(upperLimit: Double? = null, lowerLimit: Double? = null) : Double = when {
-    upperLimit != null && this > upperLimit -> upperLimit
-    lowerLimit != null && this < lowerLimit -> lowerLimit
-    else -> this
+
+data class BoundedValue<T: Comparable<T>>(val value: T, val upperLimitExceeded: Boolean, val lowerLimitExceeded: Boolean, val upperLimit: T?, val lowerLimit: T?)
+
+fun <T: Comparable<T>> T.limit(upperLimit: T? = null, lowerLimit: T? = null) : BoundedValue<T>
+{
+    val upperLimitExceeded = upperLimit != null && this > upperLimit
+    val lowerLimitExceeded = lowerLimit != null && this < lowerLimit
+
+    return BoundedValue<T>(
+        when {
+            upperLimitExceeded -> upperLimit!!
+            lowerLimitExceeded -> lowerLimit!!
+            else -> this
+        },
+        upperLimitExceeded,
+        lowerLimitExceeded,
+        upperLimit,
+        lowerLimit
+    )
 }

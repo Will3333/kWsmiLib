@@ -30,6 +30,13 @@ kotlin {
     js {
         browser()
     }
+    targets.all {
+        compilations.all {
+            kotlinOptions {
+                freeCompilerArgs = listOf("-Xallow-result-return-type")
+            }
+        }
+    }
 
     sourceSets {
         val commonMain by getting {
