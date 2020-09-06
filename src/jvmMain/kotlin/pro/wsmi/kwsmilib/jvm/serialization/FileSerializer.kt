@@ -10,13 +10,21 @@
 
 package pro.wsmi.kwsmilib.jvm.serialization
 
-import kotlinx.serialization.*
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializer
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import java.io.File
 
+@ExperimentalSerializationApi
 @Serializer(forClass = File::class)
 object FileSerializer : KSerializer<File>
 {
-    override val descriptor: SerialDescriptor = PrimitiveDescriptor("File", PrimitiveKind.STRING)
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("File", PrimitiveKind.STRING)
 
     override fun serialize(encoder: Encoder, value: File) {
         encoder.encodeString(value.path)

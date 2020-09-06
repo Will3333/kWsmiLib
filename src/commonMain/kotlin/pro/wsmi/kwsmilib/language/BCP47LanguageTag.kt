@@ -10,8 +10,10 @@
 
 package pro.wsmi.kwsmilib.language
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import pro.wsmi.kwsmilib.geo.GeographicRegion
 
+@ExperimentalSerializationApi
 data class BCP47LanguageTag (val lang : Language, val region : GeographicRegion? = null)
 {
     override fun toString(): String

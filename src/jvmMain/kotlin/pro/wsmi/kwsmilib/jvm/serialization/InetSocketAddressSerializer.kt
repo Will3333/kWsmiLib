@@ -10,47 +10,46 @@
 
 package pro.wsmi.kwsmilib.jvm.serialization
 
-import kotlinx.serialization.*
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.descriptors.buildClassSerialDescriptor
+import kotlinx.serialization.descriptors.element
+import kotlinx.serialization.encoding.*
 import java.net.InetSocketAddress
 
-@ImplicitReflectionSerializer
+
+@ExperimentalSerializationApi
 @Serializer(forClass = InetSocketAddress::class)
 object InetSocketAddressSerializer : KSerializer<InetSocketAddress>
 {
-    override val descriptor: SerialDescriptor = SerialDescriptor("InetSocketAddress") {
+    override val descriptor: SerialDescriptor = buildClassSerialDescriptor("InetSocketAddress") {
         element<String>("host")
         element<Int>("port")
     }
 
-    override fun serialize(encoder: Encoder, value: InetSocketAddress) {
-        val compositeEncoder = encoder.beginStructure(this.descriptor)
-        compositeEncoder.encodeStringElement(this.descriptor, 0, value.hostString)
-        compositeEncoder.encodeIntElement(this.descriptor, 1, value.port)
-        compositeEncoder.endStructure(this.descriptor)
+    override fun serialize(encoder: Encoder, value: InetSocketAddress) = encoder.encodeStructure(this.descriptor) {
+
+        encodeStringElement(descriptor, 0, value.hostString)
+        encodeIntElement(descriptor, 1, value.port)
     }
 
-    override fun deserialize(decoder: Decoder): InetSocketAddress
-    {
-        val compositeDecoder = decoder.beginStructure(this.descriptor)
+    override fun deserialize(decoder: Decoder): InetSocketAddress = decoder.decodeStructure(this.descriptor) {
 
         var host : String? = null
         var port : Int? = null
 
-        loop@ while (true) {
-            when (val i = compositeDecoder.decodeElementIndex(this.descriptor))
+        while (true) {
+            when (val index = decodeElementIndex(descriptor))
             {
-                CompositeDecoder.READ_DONE -> break@loop
-                0 -> host = compositeDecoder.decodeStringElement(this.descriptor, i)
-                1 -> port = compositeDecoder.decodeIntElement(this.descriptor, i)
-                else -> throw SerializationException("Unknown index $i")
+                0 -> host = decodeStringElement(descriptor, index)
+                1 -> port = decodeIntElement(descriptor, index)
+                CompositeDecoder.DECODE_DONE -> break
+                else -> error("Unexpected index: $index")
             }
         }
-
-        compositeDecoder.endStructure(this.descriptor)
-
-        return InetSocketAddress(
-            host ?: throw MissingFieldException("host"),
-            port ?: throw MissingFieldException("port")
-        )
+        require(host != null && port != null)
+        InetSocketAddress(host, port)
     }
 }

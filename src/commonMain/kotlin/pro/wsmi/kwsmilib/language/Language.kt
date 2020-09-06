@@ -10,9 +10,11 @@
 
 package pro.wsmi.kwsmilib.language
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import pro.wsmi.kwsmilib.serialization.LanguageSerializer
 
+@ExperimentalSerializationApi
 @Serializable(with = LanguageSerializer::class)
 enum class Language(val nativeName : String, val bcp47 : String, val iso639_1 : String, val iso639_3 : String)
 {

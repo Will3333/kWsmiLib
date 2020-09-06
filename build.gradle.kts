@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 William Smith
+ * Copyright 2020 William Smith
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
  *
  * https://www.apache.org/licenses/LICENSE-2.0
@@ -9,27 +9,27 @@
  */
 
 plugins {
-    kotlin("multiplatform") version "1.3.72"
-    kotlin("plugin.serialization") version "1.3.72"
+    kotlin("multiplatform") version "1.4.0"
+    kotlin("plugin.serialization") version "1.4.0"
     `maven-publish`
 }
 
 group = "pro.wsmi"
 version = "0.3.1"
 
+val SERIALIZATION_VERSION = "1.0.0-RC"
+
 repositories {
     mavenCentral()
     jcenter()
 }
 
-val serializationVersion =  "0.20.0"
 
 kotlin {
 
     jvm()
-    js {
-        browser()
-    }
+    js().browser()
+
     targets.all {
         compilations.all {
             kotlinOptions {
@@ -42,27 +42,19 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serializationVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$SERIALIZATION_VERSION")
             }
         }
 
-        val allJvm by creating {
-            dependsOn(commonMain)
-        }
         val jvmMain by getting {
             dependencies {
-                implementation(kotlin("stdlib-jdk8"))
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializationVersion")
+
             }
         }
 
-        val allJs by creating {
-            dependsOn(commonMain)
-        }
         val jsMain by getting {
             dependencies {
-                implementation(kotlin("stdlib-js"))
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-js:$serializationVersion")
+
             }
         }
     }

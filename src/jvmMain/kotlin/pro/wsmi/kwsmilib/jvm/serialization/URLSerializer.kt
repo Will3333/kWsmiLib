@@ -10,13 +10,21 @@
 
 package pro.wsmi.kwsmilib.jvm.serialization
 
-import kotlinx.serialization.*
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializer
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import java.net.URL
 
+@ExperimentalSerializationApi
 @Serializer(forClass = URL::class)
 object URLSerializer : KSerializer<URL>
 {
-    override val descriptor: SerialDescriptor = PrimitiveDescriptor("URLSerializer", PrimitiveKind.STRING)
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("URLSerializer", PrimitiveKind.STRING)
 
     override fun serialize(encoder: Encoder, value: URL) {
         encoder.encodeString(value.toString())

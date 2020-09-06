@@ -10,13 +10,21 @@
 
 package pro.wsmi.kwsmilib.serialization
 
-import kotlinx.serialization.*
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializer
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import pro.wsmi.kwsmilib.language.Language
 
+@ExperimentalSerializationApi
 @Serializer(forClass = Language::class)
 object LanguageSerializer : KSerializer<Language>
 {
-    override val descriptor: SerialDescriptor = PrimitiveDescriptor("Language", PrimitiveKind.STRING)
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("Language", PrimitiveKind.STRING)
 
     override fun serialize(encoder: Encoder, value: Language) {
         encoder.encodeString(value.name.toLowerCase())

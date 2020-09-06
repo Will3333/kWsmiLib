@@ -10,10 +10,12 @@
 
 package pro.wsmi.kwsmilib.net.http
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import pro.wsmi.kwsmilib.language.BCP47LanguageTag
 import pro.wsmi.kwsmilib.language.Language
 import pro.wsmi.kwsmilib.geo.GeographicRegion
 
+@ExperimentalSerializationApi
 public fun rawAcceptLanguageHeaderToBCP47LanguageTags(rawHeader : String) : List<BCP47LanguageTag>
 {
     val rawTags = rawHeader.split(",")
