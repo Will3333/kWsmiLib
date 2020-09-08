@@ -42,7 +42,7 @@ val ipv6Regex = Regex(pattern = """
 /**
  * Regex pattern of domain name format
  */
-val domainRegex = Regex(pattern = "([a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,6}")
+val domainRegex = Regex(pattern = "[a-zA-Z0-9](-?[a-zA-Z0-9]){1,63}\\.[a-zA-Z]{2,6}")
 
 /**
  * Regex pattern of email address format
@@ -53,3 +53,8 @@ val emailAddressRegex = Regex(pattern = "(?:[a-z0-9!#\$%&'*+/=?^_`{|}~-]+(?:\\.[
  * Regex pattern of international phone number
  */
 val internationalPhoneNumberRegex = Regex(pattern = "^\\+[1-9] ?(\\d{1,3})? ?\\(?\\d[0-9 \\(\\)-]{3,}[0-9\\)]\$")
+
+/**
+ * Regex pattern of absolute URL format
+ */
+val URLRegex = Regex(pattern = "^(?<protocol>[a-zA-Z0-9][a-zA-Z0-9\\-]{1,19}):\\/\\/((?<username>[a-zA-Z0-9_-]+)(:(?<password>[a-zA-Z0-9&#@<>°\$£%*µ§?=+_-]+))?@)?(?<host>(([a-zA-Z0-9](-?[a-zA-Z0-9]){0,63}\\.)*[a-zA-Z0-9](-?[a-zA-Z0-9]){1,63}\\.[a-zA-Z]{2,6})|(${ipv4Regex.pattern})|(\\[${ipv6Regex.pattern}\\]))(:(?<port>[1-9][0-9]{1,4}))?(?<path>\\/[a-zA-Z0-9%\\/.?=&#]*)?\$")

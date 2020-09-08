@@ -8,23 +8,32 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-package pro.wsmi.kwsmilib.js.serialization
+package pro.wsmi.kwsmilib.serialization
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import org.w3c.dom.url.URL
+import pro.wsmi.kwsmilib.net.URL
 
+@ExperimentalSerializationApi
+@Serializer(forClass = URL::class)
 object URLSerializer : KSerializer<URL>
 {
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("URLSerializer", PrimitiveKind.STRING)
+    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("URL", PrimitiveKind.STRING)
 
     override fun serialize(encoder: Encoder, value: URL) {
-        encoder.encodeString(value.href)
+        encoder.encodeString(value.toString())
     }
 
-    override fun deserialize(decoder: Decoder): URL = URL(decoder.decodeString())
+    override fun deserialize(decoder: Decoder): URL {
+        val urlStr = decoder.decodeString()
+        val url = URL.parseURL(urlStr)
+
+        return url ?: error("URL $urlStr has a bad format")
+    }
 }
