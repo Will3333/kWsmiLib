@@ -9,13 +9,13 @@
  */
 
 plugins {
-    kotlin("multiplatform") version "1.4.0"
-    kotlin("plugin.serialization") version "1.4.0"
+    kotlin("multiplatform") version "1.4.10"
+    kotlin("plugin.serialization") version "1.4.10"
     `maven-publish`
 }
 
 group = "pro.wsmi"
-version = "0.5.0"
+version = "0.6.0"
 
 val SERIALIZATION_VERSION = "1.0.0-RC"
 
