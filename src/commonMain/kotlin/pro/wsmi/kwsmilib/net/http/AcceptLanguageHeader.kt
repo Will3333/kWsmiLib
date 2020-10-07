@@ -16,7 +16,7 @@ import pro.wsmi.kwsmilib.language.Language
 import pro.wsmi.kwsmilib.geo.GeographicRegion
 
 @ExperimentalSerializationApi
-public fun rawAcceptLanguageHeaderToBCP47LanguageTags(rawHeader : String) : List<BCP47LanguageTag>
+fun rawAcceptLanguageHeaderToBCP47LanguageTags(rawHeader : String) : List<BCP47LanguageTag>
 {
     val rawTags = rawHeader.split(",")
 

@@ -18,7 +18,14 @@ import pro.wsmi.kwsmilib.serialization.LanguageSerializer
 @Serializable(with = LanguageSerializer::class)
 enum class Language(val nativeName : String, val bcp47 : String, val iso639_1 : String, val iso639_3 : String)
 {
+    ARA("العربية", "ar", "ar", "ara"),
+    CMN("普通话", "zh", "zh", "cmn"),
+    DEU("Deutsche", "de", "de", "deu"),
     ENG("English", "en", "en", "eng"),
+    EPO("Esperanto", "eo", "eo", "epo"),
     FRA("français", "fr", "fr", "fra"),
-    RUS("Русский", "ru", "ru", "rus")
+    HIN("हिन्दी", "hi", "hi", "hin"),
+    POR("Português", "pt", "pt", "por"),
+    RUS("Русский", "ru", "ru", "rus"),
+    SPA("Español", "es", "es", "spa")
 }

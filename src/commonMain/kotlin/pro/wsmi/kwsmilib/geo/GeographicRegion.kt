@@ -10,14 +10,25 @@
 
 package pro.wsmi.kwsmilib.geo
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 enum class GeographicRegion(val bcp47 : String)
 {
-    BE("be"),
-    CA("ca"),
-    CH("ch"),
-    FR("fr"),
-    GB("gb"),
-    IE("ie"),
-    RU("ru"),
-    US("us")
+    BE("BE"),
+    BR("BR"),
+    CA("CA"),
+    CH("CH"),
+    CN("CN"),
+    ES("ES"),
+    FR("FR"),
+    GB("GB"),
+    IE("IE"),
+    IN("IN"),
+    MX("MX"),
+    PT("PT"),
+    RU("RU"),
+    SA("SA"),
+    TW("TW"),
+    US("US")
 }
