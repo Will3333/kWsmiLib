@@ -11,18 +11,12 @@
 package pro.wsmi.kwsmilib.language
 
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
 import pro.wsmi.kwsmilib.geo.GeographicRegion
 
 @ExperimentalSerializationApi
+@Serializable
 data class BCP47LanguageTag (val lang : Language, val region : GeographicRegion? = null)
 {
-    override fun toString(): String
-    {
-        var bcp47FormatSring = lang.bcp47
-
-        if (region != null)
-            bcp47FormatSring += "-" + region.bcp47
-
-        return bcp47FormatSring
-    }
+    override fun toString(): String = lang.bcp47 + if (region != null) "-${region.bcp47}" else ""
 }
