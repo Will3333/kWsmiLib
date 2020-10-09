@@ -27,5 +27,20 @@ enum class Language(val nativeName : String, val bcp47 : String, val iso639_1 : 
     HIN("हिन्दी", "hi", "hi", "hin"),
     POR("Português", "pt", "pt", "por"),
     RUS("Русский", "ru", "ru", "rus"),
-    SPA("Español", "es", "es", "spa")
+    SPA("Español", "es", "es", "spa");
+
+    companion object
+    {
+        fun getFromISO639_3(code: String) : Language?
+        {
+            var foundLang : Language? = null
+            for ( lang in Language.values()) {
+                if (code == lang.iso639_3) {
+                    foundLang = lang
+                    break
+                }
+            }
+            return foundLang
+        }
+    }
 }
