@@ -22,6 +22,7 @@ import java.io.File
 
 @ExperimentalSerializationApi
 @Serializer(forClass = File::class)
+@Suppress("unused")
 object FileSerializer : KSerializer<File>
 {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("File", PrimitiveKind.STRING)

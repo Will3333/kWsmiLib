@@ -22,6 +22,7 @@ import java.net.InetSocketAddress
 
 @ExperimentalSerializationApi
 @Serializer(forClass = InetSocketAddress::class)
+@Suppress("unused")
 object InetSocketAddressSerializer : KSerializer<InetSocketAddress>
 {
     override val descriptor: SerialDescriptor = buildClassSerialDescriptor("InetSocketAddress") {

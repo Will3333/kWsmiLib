@@ -16,6 +16,7 @@ import pro.wsmi.kwsmilib.language.Language
 import pro.wsmi.kwsmilib.geo.GeographicRegion
 
 @ExperimentalSerializationApi
+@Suppress("unused")
 fun convertRawAcceptLanguageHeaderToBCP47LanguageTags(rawHeader : String) : List<BCP47LanguageTag>
 {
     val rawTags = rawHeader.split(",")

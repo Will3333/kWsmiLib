@@ -20,6 +20,7 @@ import kotlin.system.exitProcess
  * @param exitCode The status code if the function terminates the currently running process
  * @return The file itself (fluent pattern)
  */
+@Suppress("unused")
 fun File.checkFileExistsAndExitIfNot(failureExplanation : String? = "The file ${this.canonicalPath} does not exist.", exitCode : Int = 1) : File
 {
     if (!this.exists() || !this.isFile) {
@@ -37,6 +38,7 @@ fun File.checkFileExistsAndExitIfNot(failureExplanation : String? = "The file ${
  * @param exitCode The status code if the function terminates the currently running process
  * @return The directory itself (fluent pattern)
  */
+@Suppress("unused")
 fun File.checkDirectoryExistsAndExitIfNot(failureExplanation : String? = "The directory ${this.canonicalPath} does not exist.", exitCode : Int = 1) : File
 {
     if (!this.exists() || !this.isDirectory) {
@@ -54,6 +56,7 @@ fun File.checkDirectoryExistsAndExitIfNot(failureExplanation : String? = "The di
  * @param exitCode The status code if the function terminates the currently running process
  * @return The file/directory itself (fluent pattern)
  */
+@Suppress("unused")
 fun File.checkIsReadableAndExitIfNot(failureExplanation : String? = "The ${if (this.isDirectory) "directory" else "file"} ${this.canonicalPath} is not readable.", exitCode : Int = 1) : File
 {
     if (!this.canRead()) {
@@ -71,6 +74,7 @@ fun File.checkIsReadableAndExitIfNot(failureExplanation : String? = "The ${if (t
  * @param exitCode The status code if the function terminates the currently running process
  * @return The file/directory itself (fluent pattern)
  */
+@Suppress("unused")
 fun File.checkIsWritableAndExitIfNot(failureExplanation : String? = "The ${if (this.isDirectory) "directory" else "file"} ${this.canonicalPath} is not writable.", exitCode : Int = 1) : File
 {
     if (!this.canWrite()) {
