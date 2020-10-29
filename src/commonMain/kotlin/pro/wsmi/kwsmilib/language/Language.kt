@@ -31,6 +31,7 @@ enum class Language(val nativeName : String, val bcp47 : String, val iso639_1 : 
 
     companion object
     {
+        @Suppress("unused")
         fun getFromISO639_3(code: String) : Language?
         {
             var foundLang : Language? = null

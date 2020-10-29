@@ -14,6 +14,7 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import pro.wsmi.kwsmilib.serialization.URLSerializer
 
+
 @ExperimentalSerializationApi
 @Serializable(with = URLSerializer::class)
 data class URL (

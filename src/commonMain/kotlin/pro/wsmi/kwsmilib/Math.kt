@@ -13,12 +13,13 @@ package pro.wsmi.kwsmilib
 
 data class BoundedValue<T: Comparable<T>>(val value: T, val upperLimitExceeded: Boolean, val lowerLimitExceeded: Boolean, val upperLimit: T?, val lowerLimit: T?)
 
+@Suppress("unused")
 fun <T: Comparable<T>> T.limit(upperLimit: T? = null, lowerLimit: T? = null) : BoundedValue<T>
 {
     val upperLimitExceeded = upperLimit != null && this > upperLimit
     val lowerLimitExceeded = lowerLimit != null && this < lowerLimit
 
-    return BoundedValue<T>(
+    return BoundedValue (
         when {
             upperLimitExceeded -> upperLimit!!
             lowerLimitExceeded -> lowerLimit!!
