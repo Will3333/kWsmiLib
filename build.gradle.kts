@@ -15,7 +15,7 @@ plugins {
 }
 
 group = "pro.wsmi"
-version = "0.10.0"
+version = "0.10.1"
 
 val SERIALIZATION_VERSION = "1.0.0"
 
